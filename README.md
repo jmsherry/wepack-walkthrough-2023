@@ -252,4 +252,33 @@ Image optimisation can then be done like: <https://webpack.js.org/plugins/image-
       },
 ```
 
+## Loading typescript
+
+```javascript
+      {
+        test: /\.jsx?$/,
+        use: "babel-loader",
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+      },
+```
+
 ## Changing webpack babel loader for esbuild
+
+Change the above for:
+
+```javascript
+      {
+        // Match js, jsx, ts & tsx files
+        test: /\.[jt]sx?$/,
+        loader: "esbuild-loader",
+        options: {
+          // JavaScript version to compile to
+          target: "es2015",
+        },
+      },
+```
+
+as per <https://www.hotovo.com/blog/speeding-up-webpack-builds-with-esbuild>
