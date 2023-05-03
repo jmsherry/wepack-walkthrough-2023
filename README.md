@@ -225,7 +225,6 @@ Image optimisation can then be done like: <https://webpack.js.org/plugins/image-
         test: /\.(gif|png|jpe?g|svg)$/i,
         type: 'asset/resource',
         use: [
-          'file-loader',
           {
             loader: 'image-webpack-loader',
             options: {
