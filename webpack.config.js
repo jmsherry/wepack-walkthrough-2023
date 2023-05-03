@@ -1,8 +1,8 @@
 const path = require("node:path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   // mode: 'development',
@@ -20,15 +20,32 @@ module.exports = {
   plugins: [
     new MiniCSSExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: "./src/index.html",
     }),
     // new BundleAnalyzerPlugin()
   ],
   output: {
-    assetModuleFilename: 'images/[name]-[hash][ext][query]' // Cache busting can be done like: "images/[name].[hash][ext][query]" but you need to reconcile, which is easy in react but not static html
+    assetModuleFilename: "images/[name]-[hash][ext][query]", // Cache busting can be done like: "images/[name].[hash][ext][query]" but you need to reconcile, which is easy in react but not static html
   },
   module: {
     rules: [
+      // {
+      //   // Match js, jsx, ts & tsx files
+      //   test: /\.[jt]sx?$/,
+      //   loader: "esbuild-loader",
+      //   options: {
+      //     // JavaScript version to compile to
+      //     target: "es2015",
+      //   },
+      // },
+      {
+        test: /\.jsx?$/,
+        use: "babel-loader",
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+      },
       // this is an array for our different rules, js, .scss, etc.
       {
         test: /\.js$/, // test by regex
@@ -51,10 +68,10 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         use: [
           {
-            loader: 'image-webpack-loader',
+            loader: "image-webpack-loader",
             options: {
               mozjpeg: {
                 progressive: true,
